@@ -24,7 +24,7 @@ jobs:
                 pip install -r requirements.txt
 
             - name: Run pytest
-            #   run: pytest tests/ -v
-              run: pytest tests/ -v -m "not auth"
+              run: pytest tests/ -v
+              # run: pytest tests/ -v -m "not auth"
               env:
                 REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
