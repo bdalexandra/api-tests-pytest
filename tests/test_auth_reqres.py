@@ -6,13 +6,13 @@ import os
 INVALID_KEY = "invalid_api_key_for_testing"
 
 
-@pytest.mark.api
+@pytest.mark.auth
 def test_login_success(login_token):
     assert "Authorization" in login_token
     assert login_token["Authorization"].startswith("Bearer ")
 
 
-@pytest.mark.api
+@pytest.mark.auth
 def test_login_wrong_api_key():
     headers = {"x-api-key": INVALID_KEY}
     response = requests.post(
@@ -24,7 +24,7 @@ def test_login_wrong_api_key():
     assert "error" in response.json()
 
 
-@pytest.mark.api
+@pytest.mark.auth
 def test_login_missing_password(api_key):
     response = requests.post(
         "https://reqres.in/api/login",
@@ -36,7 +36,7 @@ def test_login_missing_password(api_key):
     assert "token" not in data
 
 
-@pytest.mark.api
+@pytest.mark.auth
 def test_get_user_by_id(api_key):
     response = requests.get("https://reqres.in/api/users/2", headers=api_key)
     data = response.json()
