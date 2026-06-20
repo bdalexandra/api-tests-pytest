@@ -16,7 +16,7 @@
 python3 -m venv venv
 source venv/bin/activate        # Linux/macOS
 pip install -r requirements.txt
-pytest tests/ -v
+pytest tests/ -v -m "not auth"  # тесты, которые не требуют API-ключ в .env
 ```
 
 ## Структура проекта
@@ -59,4 +59,6 @@ pytest tests/ -v
 pytest -m api           # только API-тесты
 pytest -m "not api"     # только локальные тесты
 pytest tests/test_discount.py -v    # конкретный файл
+pytest -m auth           # только тесты авторизации, которые требуют API-ключ в .env
+pytest -m "not auth"     # тесты, которые не требуют API-ключ в .env
 ```
